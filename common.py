@@ -535,7 +535,7 @@ class DiredBaseCommand:
             pattern = u'^\s*[▸▾] '
             sep = re.escape(os.sep)
         else:
-            pattern = u'^\s*≡ '
+            pattern = r'^\s*\S '
             sep = ''
         return self.view.find_all(u'%s%s%s' % (pattern, fname, sep))
 
