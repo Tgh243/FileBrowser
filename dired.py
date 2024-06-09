@@ -53,16 +53,16 @@ def plugin_loaded():
 
     import sys
     dfsobserver = '%s0_dired_fs_observer' % ('FileBrowser.' if ST3 else '')
-    if dfsobserver not in sys.modules or sys.modules[dfsobserver].Observer is None:
-        return sublime.error_message(
-            u'FileBrowser:\n\n'
-            u'watchdog module is not importable, hence we cannot know about '
-            u'changes on file system, and auto-refresh will not work.\n\n'
-            u'Despite that, FileBrowser is fully usable without auto-refresh, '
-            u'you can just ignore this message and manually refresh view with r key.\n\n'
-            u'But if you want working auto-refresh:\n'
-            u' • if you install manually, then look at Readme how to install it,\n'
-            u' • if you install via Package Control, report an issue.')
+    # if dfsobserver not in sys.modules or sys.modules[dfsobserver].Observer is None:
+    #     return sublime.error_message(
+    #         u'FileBrowser:\n\n'
+    #         u'watchdog module is not importable, hence we cannot know about '
+    #         u'changes on file system, and auto-refresh will not work.\n\n'
+    #         u'Despite that, FileBrowser is fully usable without auto-refresh, '
+    #         u'you can just ignore this message and manually refresh view with r key.\n\n'
+    #         u'But if you want working auto-refresh:\n'
+    #         u' • if you install manually, then look at Readme how to install it,\n'
+    #         u' • if you install via Package Control, report an issue.')
 
     sublime.load_settings('dired.sublime-settings').add_on_change('dired_autorefresh', lambda: emit_event(u'toggle_watch_all', sublime.load_settings('dired.sublime-settings').get('dired_autorefresh', None)))
     # if not ST3:
@@ -305,7 +305,7 @@ class DiredRefreshCommand(TextCommand, DiredBaseCommand):
             else:
                 index_files.append(new_path)
                 files.append(u'%s≡ %s' % (indent, f))
-                
+
         self.index += index_files
         tree += files
         return tree
